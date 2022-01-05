@@ -24,6 +24,26 @@ exports.getSubreddit = async (req, res, next) => {
                 console.log("Sorting");
                 days.getTimes(subreddit.timeStamps);
 
+                // TODO:
+
+                // Move switch statement to subreddit model
+                // each Day is a instance of days model
+                // create alldays object to pass into switch statement
+                // const allDays = {
+                //     sunday: new days()
+                // }
+
+                // Use foreach to call sortimes & set day & temp
+                // daysArray.forEach((day) => {
+                //     days.sortTimes(day, 0, days.temp);
+                // });
+
+                // maybe create method for the days class to:
+                // days.sortTimes(days.sunday, 0, days.temp);
+                // //console.log(days.temp);
+                // days.sundaySet = days.temp;
+                // days.tempSet = [];
+
                 days.sortTimes(days.sunday, 0, days.temp);
                 //console.log(days.temp);
                 days.sundaySet = days.temp;

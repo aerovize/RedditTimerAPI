@@ -1,13 +1,11 @@
-const express = require("express");
+const http = require("http");
 
-const app = express();
 require("dotenv").config();
-const PORT = 3001;
 
-const authRoutes = require("./routes/auth");
-const controlRoutes = require("./routes/subreddit");
+const app = require("./app");
 
-app.use("/", authRoutes);
-app.use("/api", controlRoutes);
+const PORT = process.env.PORT || 3001;
 
-app.listen(PORT, () => console.log(`Server listening on Port: ${PORT}`));
+const server = http.createServer(app);
+
+server.listen(PORT, () => console.log(`Server listening on Port: ${PORT}`));
