@@ -1,100 +1,46 @@
 class Days {
     constructor() {
-        (this.temp = []),
-            (this.sunday = []),
-            (this.monday = []),
-            (this.tuesday = []),
-            (this.wednsday = []),
-            (this.thursday = []),
-            (this.friday = []),
-            (this.saturday = []);
+        (this.temp = []), (this.hours = []);
     }
 
-    set sundaySet(v) {
-        this.sunday = v;
-    }
-
-    set mondaySet(v) {
-        this.monday = v;
-    }
-
-    set tuesdaySet(v) {
-        this.tuesday = v;
-    }
-
-    set wednsdaySet(v) {
-        this.wednsday = v;
-    }
-
-    set thursdaySet(v) {
-        this.thursday = v;
-    }
-
-    set fridaySet(v) {
-        this.friday = v;
-    }
-
-    set saturdaySet(v) {
-        this.saturday = v;
+    set hoursSet(v) {
+        this.hours = v;
     }
 
     set tempSet(v) {
         this.temp = v;
     }
 
-    getTimes(timeStamps) {
-        timeStamps.forEach((time) => {
-            const date = new Date(time * 1000);
-            const hour = date.getHours();
-            const day = date.getDay();
-            //const year = date.getFullYear();
-            switch (day) {
-                case 0:
-                    this.sunday.push(hour);
-                    return;
-                case 1:
-                    this.monday.push(hour);
-                    return;
-                case 2:
-                    this.tuesday.push(hour);
-                    return;
-                case 3:
-                    this.wednsday.push(hour);
-                    return;
-                case 4:
-                    this.thursday.push(hour);
-                    return;
-                case 5:
-                    this.friday.push(hour);
-                    return;
-                case 6:
-                    this.saturday.push(hour);
-                    return;
-            }
-        });
+    get hoursGet() {
+        return this.hours;
     }
-
-    sortTimes(arry, i, temp) {
-        const filtered = arry.filter(function (value, index, arr) {
+    // Filters out the times 
+    sortTimes(i) {
+        const filtered = this.hours.filter(function (value, index, arr) {
             return value == i;
         });
-
+        // All times have been sorted into their own arrays, return out of the method.
         if (!filtered.length) {
-            // console.log("CLEANUP");
             // daySet = temp;
             return;
         }
-
+        // The times start at 0 and end at 23, so i keeps track of what times value we are on
+        // and prevents it from sorting, when there are no more values.
         i++;
-        temp.push(filtered);
-        //console.log(temp);
-        this.sortTimes(arry, i, temp);
+        // Temporarily Store in array
+        this.temp.push(filtered);
+        // Calls itself until the hours array is empty
+        this.sortTimes(i);
     }
 
-    cleanup(daySet, temp) {
-        daySet = [...temp];
+    setDays() {
+        this.sortTimes(0);
+        // sets the hours array to store the sorted times, which are each in their own array 
+        // [[0,0,0,], [1,1,1,1,1], [2,2,2,2,2], [3,3,3]]
+        this.hoursSet = this.temp;
         this.tempSet = [];
     }
+
 }
 
 module.exports = Days;
