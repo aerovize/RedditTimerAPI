@@ -4,7 +4,7 @@ const fetch = require("node-fetch");
 // The reddit api oauth flow
 
 function makeAuthUrl() {
-    const params = {
+    const authParams = {
         client_id: process.env.CLIENT_ID,
         response_type: "code",
         state: uuidv4(),
@@ -12,11 +12,16 @@ function makeAuthUrl() {
         duration: "temporary",
         scope: "read",
     };
-    const qs = Object.keys(params)
-        .map((key) => `${key}=${params[key]}`)
-        .join("&");
-
-    return `https://ssl.reddit.com/api/v1/authorize?${qs}`;
+    
+        const params = new URLSearchParams();
+        params.append("client_id", authParams.client_id)
+        params.append("response_type", authParams.response_type)
+        params.append("state", authParams.state)
+        params.append("redirect_uri", authParams.redirect_uri)
+        params.append("duration", authParams.duration)
+        params.append("scope", authParams.scope)
+        
+        return `https://ssl.reddit.com/api/v1/authorize?${params}`;
 }
 
 async function fetchToken(code) {

@@ -24,7 +24,7 @@ class Days {
             // daySet = temp;
             return;
         }
-        // The times start at 0 and end at 23, so i keeps track of what times value we are on
+        // The times start at 0 and end at 24, so it keeps track of what time value we are on
         // and prevents it from sorting, when there are no more values.
         i++;
         // Temporarily Store in array

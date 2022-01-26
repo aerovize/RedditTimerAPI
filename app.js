@@ -1,7 +1,7 @@
 const express = require("express");
 
-const authRoutes = require("./routes/auth");
-const controlRoutes = require("./routes/subreddit");
+const authRoutes = require("./routes/auth.routes");
+const controlRoutes = require("./routes/subreddit.routes");
 
 const app = express();
 

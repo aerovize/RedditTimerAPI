@@ -122,6 +122,8 @@ async function subredditTimes(subreddit, authToken) {
         //TODO: Sort arrays to time by length
 
         return {
+            // Military Time: 0 is 12AM, 24 is 12PM
+             // [[0,0,0,], [1,1,1,1,1], [2,2,2,2,2], [3,3,3]]
             sunday: allDays.sunday.hoursGet,
             monday: allDays.monday.hoursGet,
             tuesday: allDays.tuesday.hoursGet,
